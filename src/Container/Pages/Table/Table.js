@@ -43,9 +43,15 @@ const TableView = () => {
     }
   })
 
+  let NoDepartment = [{ value: "no", label: "no" }]
+  let mergeDepartment = departOption && NoDepartment?.concat(departOption)
+
   const yearOption = yearsData?.year?.map((d) => {
     return { value: d, label: d }
   })
+
+  let NoYear = [{ value: "no", label: "no" }]
+  let mergeYear = yearOption && NoYear?.concat(yearOption)
 
   const handleNumFiltersChange = (event) => {
     let value = parseInt(event.target.value);
@@ -64,7 +70,9 @@ const TableView = () => {
       department: department?.toString(),
       year: year?.toString(),
       filterCount: numFilters?.toString(),
-      ...searchValues
+      ...searchValues,
+      email: login.email,
+      token: login.token
     }
 
     try {
@@ -74,7 +82,13 @@ const TableView = () => {
         errorNotify("Please filled up all fields")
         return;
       }
-      dispatch(getSearchDocument(data))
+
+      const formData = new FormData();
+      for(let d in data){
+        formData.append(`${d}`, data[d])
+      }
+
+      dispatch(getSearchDocument(formData))
     }
     catch (error) {
       errorNotify(error.message)
@@ -102,13 +116,13 @@ const TableView = () => {
           <Col md={3}>
             <Form.Group className="form_field">
               <Form.Label>Department <span>*</span> </Form.Label>
-              <Select isLoading={departmentLoading} onChange={(d) => setDepartment(d.value)} options={departOption} placeholder="Select Department" styles={dashboardColorStyles} />
+              <Select isLoading={departmentLoading} onChange={(d) => setDepartment(d.value)} options={mergeDepartment} placeholder="Select Department" styles={dashboardColorStyles} />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group className="form_field">
               <Form.Label>Year <span>*</span> </Form.Label>
-              <Select isLoading={yearsLoading} onChange={(d) => setYear(d.value)} options={yearOption} placeholder="Select Year" styles={dashboardColorStyles} />
+              <Select isLoading={yearsLoading} onChange={(d) => setYear(d.value)} options={mergeYear} placeholder="Select Year" styles={dashboardColorStyles} />
             </Form.Group>
           </Col>
         </Row>

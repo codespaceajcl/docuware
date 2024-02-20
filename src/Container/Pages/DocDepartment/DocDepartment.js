@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../Utils/Helper';
 import { getAllDepartmentDocs } from '../../../Redux/Action/Dashboard';
+import Loader from '../../../Utils/Loader';
 
 const DocDepartment = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const DocDepartment = () => {
         formData.append("email", login.email)
         formData.append("token", login.token)
 
-        // dispatch(getAllDepartmentDocs(formData))
+        dispatch(getAllDepartmentDocs(formData))
     }, [])
 
     const departmentHandler = (department) => {
@@ -32,74 +33,38 @@ const DocDepartment = () => {
                 </Col>
             </Row>
 
-            <div className='mt-3 mx-3'>
-                <Row style={{ gap: "15px 0" }}>
-                    <Col md={4}>
-                        <div className='department_box'>
-                            <h5>Aviation</h5>
-                            <div>
-                                <h6>Total Types</h6>
-                                <p>20</p>
-                            </div>
-                            <div>
-                                <h6>Total Docs</h6>
-                                <p>15</p>
-                            </div>
-                            <div className='view_btn'>
-                                <button onClick={() => departmentHandler("Aviation")}>View</button>
-                            </div>
-                        </div>
-                    </Col>
-                    {/* <Col md={4}>
-                        <div className='department_box'>
-                            <h5>JHolding</h5>
-                            <div>
-                                <h6>Total Types</h6>
-                                <p>20</p>
-                            </div>
-                            <div>
-                                <h6>Total Docs</h6>
-                                <p>15</p>
-                            </div>
-                            <div className='view_btn'>
-                                <button onClick={() => departmentHandler("Aviation")}>View</button>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className='department_box'>
-                            <h5>IT</h5>
-                            <div>
-                                <h6>Total Types</h6>
-                                <p>20</p>
-                            </div>
-                            <div>
-                                <h6>Total Docs</h6>
-                                <p>15</p>
-                            </div>
-                            <div className='view_btn'>
-                                <button onClick={() => departmentHandler("Aviation")}>View</button>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className='department_box'>
-                            <h5>HR</h5>
-                            <div>
-                                <h6>Total Types</h6>
-                                <p>20</p>
-                            </div>
-                            <div>
-                                <h6>Total Docs</h6>
-                                <p>15</p>
-                            </div>
-                            <div className='view_btn'>
-                                <button onClick={() => departmentHandler("Aviation")}>View</button>
-                            </div>
-                        </div>
-                    </Col> */}
-                </Row>
-            </div>
+            {
+                loading ? <Loader /> :
+                    <div className='mt-3 mx-3'>
+                        <Row style={{ gap: "15px 0" }}>
+                            {
+                                departDocData && Object.entries(departDocData?.response)?.map((d) => {
+                                    return (
+                                        <Col md={4}>
+                                            <div className='department_box'>
+                                                <h5>{d[0]}</h5>
+
+                                                {
+                                                    d[1]?.map((t) => {
+                                                        return (
+                                                            <div>
+                                                                <h6>{t?.documentType}</h6>
+                                                                <p>{t?.count}</p>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                                <div className='view_btn'>
+                                                    <button onClick={() => departmentHandler(d[0])}>View</button>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    )
+                                })
+                            }
+                        </Row>
+                    </div>
+            }
         </div>
     )
 }

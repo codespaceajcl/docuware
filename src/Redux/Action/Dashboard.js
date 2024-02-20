@@ -168,7 +168,7 @@ export const getAllDepartmentDocs = (formData) => async (dispatch) => {
             type: "GET_ALL_DEPARTMENT_DOCUMENTS_REQUEST",
         });
 
-        const { data } = await axios.post("docuware/getAllDepartmentDocuments/", formData);
+        const { data } = await axios.post("archival/departmentDocumentSummary/", formData);
 
         dispatch({
             type: "GET_ALL_DEPARTMENT_DOCUMENTS_SUCCESS",

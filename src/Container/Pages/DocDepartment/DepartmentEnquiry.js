@@ -48,6 +48,8 @@ const DepartmentEnquiry = () => {
     const yearOption = yearsData?.year?.map((d) => {
         return { value: d, label: d }
     })
+    let NoYear = [{ value: "no", label: "no" }]
+    let mergeYear = yearOption && NoYear?.concat(yearOption)
 
     const handleNumFiltersChange = (event) => {
         let value = parseInt(event.target.value);
@@ -66,6 +68,8 @@ const DepartmentEnquiry = () => {
             department: departOption?.id.toString(),
             year: year?.toString(),
             filterCount: numFilters?.toString(),
+            email: login.email,
+            token: login.token,
             ...searchValues
         }
 
@@ -76,7 +80,13 @@ const DepartmentEnquiry = () => {
                 errorNotify("Please filled up all fields")
                 return;
             }
-            dispatch(getSearchDocument(data))
+
+            const formData = new FormData();
+            for (let d in data) {
+                formData.append(`${d}`, data[d])
+            }
+
+            dispatch(getSearchDocument(formData))
         }
         catch (error) {
             errorNotify(error.message)
@@ -112,7 +122,7 @@ const DepartmentEnquiry = () => {
                     <Col md={3}>
                         <Form.Group className="form_field">
                             <Form.Label>Year <span>*</span> </Form.Label>
-                            <Select isLoading={yearsLoading} onChange={(d) => setYear(d.value)} options={yearOption} placeholder="Select Year" styles={dashboardColorStyles} />
+                            <Select isLoading={yearsLoading} onChange={(d) => setYear(d.value)} options={mergeYear} placeholder="Select Year" styles={dashboardColorStyles} />
                         </Form.Group>
                     </Col>
                 </Row>

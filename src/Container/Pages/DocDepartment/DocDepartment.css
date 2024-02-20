@@ -21,12 +21,13 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid lightgrey;
-    padding-bottom: 7px;
-    margin-bottom: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .department_box h6{
     margin-bottom: 0;
+    font-size: 14px;
 }
 
 .department_box p{
@@ -51,5 +52,5 @@
     padding: 7px;
     border-radius: 5px;
     font-weight: 600;
-    margin-top: 15px;
+    margin-top: 5px;
 }
