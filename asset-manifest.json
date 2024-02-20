@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/docuware/static/css/main.7af60082.css",
+    "main.js": "/docuware/static/js/main.65dd3283.js",
+    "static/media/user_avatar.png": "/docuware/static/media/user_avatar.2e3128477ecce14831a6.png",
+    "static/media/notfound.png": "/docuware/static/media/notfound.6c96b2283321ec945ef5.png",
+    "index.html": "/docuware/index.html",
+    "main.7af60082.css.map": "/docuware/static/css/main.7af60082.css.map",
+    "main.65dd3283.js.map": "/docuware/static/js/main.65dd3283.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7af60082.css",
+    "static/js/main.65dd3283.js"
+  ]
+}
