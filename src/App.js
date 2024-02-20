@@ -12,7 +12,7 @@ import DepartmentEnquiry from './Container/Pages/DocDepartment/DepartmentEnquiry
 
 const App = () => {
   return (
-    <BrowserRouter basename='/dms'>
+    <BrowserRouter basename='/docuware'>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       <Routes>
 

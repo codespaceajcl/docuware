@@ -1,6 +1,7 @@
 {
   "name": "archival",
   "version": "0.1.0",
+  "homepage": "https://codespaceajcl.github.io/docuware/",
   "private": false,
   "dependencies": {
     "axios": "^1.6.2",
@@ -27,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,6 +51,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.0"
+    "gh-pages": "^6.1.1"
   }
 }
